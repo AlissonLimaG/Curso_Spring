@@ -6,6 +6,7 @@ import spring.course.app.entities.User;
 import spring.course.app.repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -19,6 +20,11 @@ public class UserService {
 
     public List<User> findAll(){
         return userRepository.findAll();
+    }
+
+    public User findById(Long id){
+        Optional<User> u = userRepository.findById(id);
+        return u.orElseThrow(()-> new RuntimeException("User not Found"));
     }
 
 }
