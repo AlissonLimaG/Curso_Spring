@@ -1,13 +1,17 @@
 package spring.course.app.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
-@Table(name = "users")
+@Table(name = "tb_user")
 public class User {
 
     @Id
@@ -19,6 +23,10 @@ public class User {
     private String email;
     private String password;
     private String phone;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public User(Long id, String name, String email, String password, String phone) {
         this.id = id;
@@ -64,5 +72,9 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }
