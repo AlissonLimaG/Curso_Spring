@@ -1,10 +1,6 @@
 package spring.course.app.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +20,6 @@ public class User {
     private String password;
     private String phone;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
