@@ -1,11 +1,11 @@
 package spring.course.app.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Category {
@@ -13,8 +13,11 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -26,6 +29,10 @@ public class Category {
 
     public Long getId() {
         return id;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
     }
 
     public void setId(Long id) {
@@ -51,4 +58,5 @@ public class Category {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
 }
